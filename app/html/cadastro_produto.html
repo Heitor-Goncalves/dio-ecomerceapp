@@ -2,190 +2,183 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>E-commerce App</title>
+    <title>Cadastro de Produto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
+        body { margin: 0; font-family: Arial, sans-serif; background: #181a1b; color: #e0e0e0; }
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
             background: #23272a;
-            max-width: 100vw;
-            overflow-x: hidden;
-        }
-        header { 
-            background: #222; 
-            color: #fff; 
-            padding: 20px 0; 
-            text-align: center;
-            position: relative;
-        }
-        main, .products {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        .banner {
-            background: url('./assets/banner-ecomerce.jpg') center/cover no-repeat;
-            height: 100vh;
-            min-height: 350px;
-            max-height: 100vh;
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #c5c5c5;
-            font-size: 2.5rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-        .banner::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 60%;
-            background: linear-gradient(to top, rgba(30,30,30,0.85) 0%, rgba(30,30,30,0.0) 100%);
-            pointer-events: none;
-            z-index: 1;
-        }
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px;
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .product-card {
-            background: #fff;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            padding: 32px 28px 24px 28px;
+            position: relative;
         }
-        .product-card:hover {
-            box-shadow: 0 4px 16px rgba(0,0,0,0.13);
-        }
-        .product-card img {
-            width: 100%;
-            max-width: 160px;
-            height: 160px;
-            object-fit: contain;
-            margin-bottom: 12px;
-        }
-        .product-title {
-            font-size: 1.1rem;
-            margin: 8px 0;
+        h2 {
             text-align: center;
+            margin-bottom: 28px;
+            color: #fff;
         }
-        .product-price {
-            color: #27ae60;
+        label {
+            display: block;
+            margin-bottom: 6px;
             font-weight: bold;
-            margin-bottom: 12px;
+            color: #b0b8c1;
         }
-        .buy-btn {
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            font-size: 1rem;
+            background: #23272a;
+            color: #e0e0e0;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: #0078d4;
+            background: #23272a;
+        }
+        button {
+            width: 100%;
             background: #0078d4;
             color: #fff;
             border: none;
             border-radius: 4px;
-            padding: 10px 18px;
+            padding: 12px;
+            font-size: 1.1rem;
             cursor: pointer;
-            font-size: 1rem;
             transition: background 0.2s;
         }
-        .buy-btn:hover {
+        button:hover {
             background: #005fa3;
         }
-        .cadastro-btn {
+        .produtos-lista {
+            margin-top: 36px;
+        }
+        .produto-item {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            background: #23272a;
+            border-radius: 6px;
+            padding: 12px 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+        }
+        .produto-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #222;
+        }
+        .produto-item strong {
+            font-size: 1.08rem;
+            color: #fff;
+        }
+        .produto-item span {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .produto-item small {
+            color: #b0b8c1;
+        }
+        .voltar-btn {
             position: absolute;
             top: 24px;
-            right: 32px;
-            background: #0078d4;
+            left: 32px;
+            background: #23272a;
             color: #fff;
             padding: 10px 18px;
             border-radius: 4px;
             text-decoration: none;
             font-size: 1rem;
             font-weight: bold;
-            transition: background 0.2s;
-            z-index: 10;
+            border: 1px solid #444;
+            transition: background 0.2s, border 0.2s;
         }
-        @media (max-width: 600px) {
-            .cadastro-btn {
-                position: static;
-                display: block;
-                width: 90%;
-                margin: 16px auto 0 auto;
-                text-align: center;
-                font-size: 1.1rem;
-            }
-            header {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 8px;
-            }
+        .voltar-btn:hover {
+            background: #181a1b;
+            border: 1px solid #0078d4;
         }
-        @media (max-width: 1300px) {
-            .products {
-                max-width: 98vw;
-                padding-left: 1vw;
-                padding-right: 1vw;
-            }
+        form {
+            display: flex;
+            flex-direction: column;
+            margin: 20px;
         }
-        @media (max-width: 900px) {
-            .products {
-                max-width: 100vw;
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-        footer {
-            background: #222;
+        .editar-btn, .excluir-btn {
+            background: #23272a;
             color: #fff;
-            text-align: center;
-            padding: 18px 0;
-            margin-top: 40px;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 7px 14px;
+            margin-left: 8px;
+            font-size: 0.98rem;
+            cursor: pointer;
+            transition: background 0.2s, border 0.2s;
+            width: 80px;
         }
-        .subtitle {
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 12px;
-            bottom: 40px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            z-index: 2;
+        .editar-btn:hover {
+            background: #0078d4;
+            border: 1px solid #0078d4;
+        }
+        .excluir-btn:hover {
+            background: #c0392b;
+            border: 1px solid #c0392b;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>DIO SHOP</h1>
-        <a href="cadastro_produto.html" class="cadastro-btn">Cadastrar Produtos</a>
-    </header>
-    <div class="banner">
-        <div class="subtitle">Promoções Especiais de Inverno!</div>
+    <a href="index.html" class="voltar-btn">&larr; Voltar para Home</a>
+    <div class="container">
+        
+        <h2>Cadastro de Produto</h2>
+        <form method="post" action="#">
+            <label for="nome">Nome do Produto</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="preco">Preço (R$)</label>
+            <input type="number" id="preco" name="preco" step="0.01" min="0" required>
+
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="3" required></textarea>
+
+            <label for="imagem">URL da Imagem</label>
+            <input type="url" id="imagem" name="imagem">
+
+            <button type="submit">Cadastrar Produto</button>
+        </form>
+
+        <div class="produtos-lista" id="lista-produtos"></div>
     </div>
-    <section class="products" id="products-list">
-        <!-- Os produtos cadastrados via localStorage serão exibidos aqui pelo JS -->
-    </section>
+
     <script>
-        function exibirProdutos() {
-            const container = document.getElementById('products-list');
-            container.innerHTML = '';
-            const produtos = JSON.parse(localStorage.getItem('produtos')) || [];
-            if (produtos.length === 0) {
-                // Placeholders se não houver produtos cadastrados
-                const placeholders = [
+        // Função para salvar produto no localStorage
+        function salvarProduto(event) {
+            event.preventDefault();
+            const nome = document.getElementById('nome').value;
+            const preco = document.getElementById('preco').value;
+            const descricao = document.getElementById('descricao').value;
+            const imagem = document.getElementById('imagem').value;
+            const produto = { nome, preco, descricao, imagem };
+            let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            produtos.push(produto);
+            localStorage.setItem('produtos', JSON.stringify(produtos));
+            listarProdutos();
+            event.target.reset();
+        }
+
+        // Função para listar produtos cadastrados
+        function listarProdutos() {
+            const lista = document.getElementById('lista-produtos');
+            if (!lista) return;
+            lista.innerHTML = '';
+            let produtos = JSON.parse(localStorage.getItem('produtos'));
+            if (!produtos || produtos.length === 0) {
+                produtos = [
                     {
                         nome: 'Teclado Gammer',
                         preco: '199.90',
@@ -211,35 +204,60 @@
                         imagem: 'https://www.gigantec.com.br/media/catalog/product/cache/66c3fa0fb26d248d0ca40a64a387c3da/m/o/mouse-gamer-king-pro-4k-m916-pro-4k-redragon-01.jpg'
                     }
                 ];
-                placeholders.forEach(produto => {
-                    const div = document.createElement('div');
-                    div.className = 'product-card';
-                    div.innerHTML = `
-                        <img src="${produto.imagem}" alt="${produto.nome}">
-                        <div class="product-title">${produto.nome}</div>
-                        <div class="product-price">R$ ${parseFloat(produto.preco).toFixed(2)}</div>
-                        <button class="buy-btn" disabled>Comprar</button>
-                    `;
-                    container.appendChild(div);
-                });
-                return;
+                localStorage.setItem('produtos', JSON.stringify(produtos));
             }
-            produtos.forEach(produto => {
+            produtos.forEach((produto, idx) => {
                 const div = document.createElement('div');
-                div.className = 'product-card';
+                div.className = 'produto-item';
                 div.innerHTML = `
-                    <img src="${produto.imagem || 'https://via.placeholder.com/160x160?text=Sem+Imagem'}" alt="${produto.nome}">
-                    <div class="product-title">${produto.nome}</div>
-                    <div class="product-price">R$ ${parseFloat(produto.preco).toFixed(2)}</div>
-                    <button class="buy-btn" disabled>Comprar</button>
+                    <img src="${produto.imagem || 'https://via.placeholder.com/80x80?text=Sem+Imagem'}" alt="${produto.nome}" />
+                    <div style="flex:1;">
+                        <strong>${produto.nome}</strong><br>
+                        <span>R$ ${parseFloat(produto.preco).toFixed(2)}</span><br>
+                        <small>${produto.descricao}</small>
+                    </div>
+                    <button class="editar-btn" data-idx="${idx}">Editar</button>
+                    <button class="excluir-btn" data-idx="${idx}">Excluir</button>
                 `;
-                container.appendChild(div);
+                lista.appendChild(div);
+            });
+            // Adiciona eventos aos botões
+            document.querySelectorAll('.excluir-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    excluirProduto(this.getAttribute('data-idx'));
+                });
+            });
+            document.querySelectorAll('.editar-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editarProduto(this.getAttribute('data-idx'));
+                });
             });
         }
-        document.addEventListener('DOMContentLoaded', exibirProdutos);
+
+        function excluirProduto(idx) {
+            let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            produtos.splice(idx, 1);
+            localStorage.setItem('produtos', JSON.stringify(produtos));
+            listarProdutos();
+        }
+
+        function editarProduto(idx) {
+            let produtos = JSON.parse(localStorage.getItem('produtos')) || [];
+            const produto = produtos[idx];
+            document.getElementById('nome').value = produto.nome;
+            document.getElementById('preco').value = produto.preco;
+            document.getElementById('descricao').value = produto.descricao;
+            document.getElementById('imagem').value = produto.imagem;
+            // Remove o produto antigo para ser substituído ao salvar
+            produtos.splice(idx, 1);
+            localStorage.setItem('produtos', JSON.stringify(produtos));
+            listarProdutos();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('form').addEventListener('submit', salvarProduto);
+            listarProdutos();
+        });
     </script>
-    <footer>
-        &copy; 2024 Minha Loja Online. Todos os direitos reservados.
-    </footer>
 </body>
 </html>
